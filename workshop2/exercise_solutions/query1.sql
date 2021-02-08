@@ -1,6 +1,10 @@
+-- get number of transactions and total amount spent per customer
+
 SELECT 
-  customer_id,
+  customers.name,
   COUNT(*) as TransactionCount, 
-  SUM(amount) as TotalAmount 
+  SUM(transactions.amount) as TotalAmount 
  FROM transactions
- GROUP BY customer_id;
+ JOIN customers
+ ON transactions.customer_id = customers.id
+ GROUP BY transactions.customer_id;
